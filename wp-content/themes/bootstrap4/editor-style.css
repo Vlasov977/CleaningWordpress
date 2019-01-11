@@ -1,0 +1,29 @@
+h1, .h1 {
+  /*basic heading styles*/
+  font-size: 2rem;
+}
+
+h2, .h2 {
+  /*basic heading styles*/
+  font-size: 1.8rem
+}
+
+h3, .h3 {
+  /*basic heading styles*/
+  font-size: 1.6rem
+}
+
+h4, .h4 {
+  /*basic heading styles*/
+  font-size: 1.4rem
+}
+
+h5, .h5 {
+  /*basic heading styles*/
+  font-size: 1.2rem
+}
+
+h6, .h6 {
+  /*basic heading styles*/
+  font-size: 1rem
+}

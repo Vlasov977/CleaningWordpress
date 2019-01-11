@@ -1,0 +1,60 @@
+.strong-view {
+  &.controls-style-buttons {
+    .wpmslider-start,
+    .wpmslider-stop,
+    .wpmslider-next,
+    .wpmslider-prev {
+      font-family: FontAwesome;
+      display: inline-block;
+      color: #999;
+      cursor: pointer;
+      font-size: 24px;
+      line-height: 24px;
+      width: 24px;
+      height: 24px;
+      text-align: center;
+      transition: all 0.2s ease;
+    }
+
+    .wpmslider-start:before,
+    .wpmslider-stop:before {
+      position: relative;
+      top: -1px;
+    }
+
+    .wpmslider-start:before {
+      content: "\f04b";
+    }
+
+    .wpmslider-stop:before {
+      content: "\f04c";
+    }
+
+    .wpmslider-start:hover,
+    .wpmslider-stop:hover,
+    .wpmslider-next:hover,
+    .wpmslider-prev:hover {
+      color: #111;
+    }
+
+    &:not(.rtl) {
+      .wpmslider-prev:before {
+        content: "\f053";
+      }
+
+      .wpmslider-next:before {
+        content: "\f054";
+      }
+    }
+
+    &.rtl {
+      .wpmslider-prev:before {
+        content: "\f054";
+      }
+
+      .wpmslider-next:before {
+        content: "\f053";
+      }
+    }
+  }
+}

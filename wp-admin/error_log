@@ -1,0 +1,11 @@
+[02-Dec-2018 22:41:31 UTC] PHP Notice:  Undefined index: unique_events in /home/develop6/public_html/cleaning/wp-content/plugins/mp-timetable/classes/class-shortcode.php on line 92
+[02-Dec-2018 22:41:34 UTC] PHP Notice:  Undefined index: unique_events in /home/develop6/public_html/cleaning/wp-content/plugins/mp-timetable/classes/class-shortcode.php on line 92
+[02-Dec-2018 22:50:56 UTC] PHP Notice:  Undefined index: form_show in /home/develop6/public_html/cleaning/wp-content/plugins/booking/core/admin/wpbc-toolbars.php on line 1891
+[03-Dec-2018 01:29:46 UTC] PHP Notice:  Undefined index: form_show in /home/develop6/public_html/cleaning/wp-content/plugins/booking/core/admin/wpbc-toolbars.php on line 1891
+[03-Dec-2018 09:59:52 UTC] PHP Notice:  get_settings is <strong>deprecated</strong> since version 2.1.0! Use get_option() instead. in /home/develop6/public_html/cleaning/wp-includes/functions.php on line 3853
+[09-Dec-2018 09:54:47 UTC] PHP Notice:  edit_form_after_title is <strong>deprecated</strong> since version 5.0.0! Use block_editor_meta_box_hidden_fields instead. This action is still supported in the classic editor, but is deprecated in the block editor. in /home/develop6/public_html/cleaning/wp-includes/functions.php on line 4112
+[09-Dec-2018 09:54:47 UTC] PHP Notice:  edit_form_advanced is <strong>deprecated</strong> since version 5.0.0! Use block_editor_meta_box_hidden_fields instead. This action is still supported in the classic editor, but is deprecated in the block editor. in /home/develop6/public_html/cleaning/wp-includes/functions.php on line 4112
+[09-Dec-2018 11:12:31 UTC] PHP Notice:  Undefined index: text_size in /home/develop6/public_html/cleaning/wp-content/plugins/widget-google-reviews/grw-widget.php on line 109
+[09-Dec-2018 11:12:31 UTC] PHP Notice:  Undefined index: dark_theme in /home/develop6/public_html/cleaning/wp-content/plugins/widget-google-reviews/grw-widget.php on line 109
+[09-Dec-2018 11:21:49 UTC] PHP Notice:  Undefined index: text_size in /home/develop6/public_html/cleaning/wp-content/plugins/widget-google-reviews/grw-widget.php on line 109
+[09-Dec-2018 11:21:49 UTC] PHP Notice:  Undefined index: dark_theme in /home/develop6/public_html/cleaning/wp-content/plugins/widget-google-reviews/grw-widget.php on line 109

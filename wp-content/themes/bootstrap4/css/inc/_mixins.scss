@@ -1,0 +1,1058 @@
+@import "support";
+
+// Columns
+
+
+// Specify the shorthand `columns` property.
+//
+// Example:
+//
+//     @include columns(20em 2)
+@mixin columns($width-and-count) {
+	@include experimental(columns, $width-and-count,
+		-moz, -webkit, -o, -ms, not(-khtml), official
+	);
+}
+
+// Specify the number of columns
+@mixin column-count($count) {
+	@include experimental(column-count, $count,
+		-moz, -webkit, -o, -ms, not(-khtml), official
+	);
+}
+
+// Specify the gap between columns e.g. `20px`
+@mixin column-gap($width) {
+	@include experimental(column-gap, $width,
+		-moz, -webkit, -o, -ms, not(-khtml), official
+	);
+}
+
+// Specify the width of columns e.g. `100px`
+@mixin column-width($width) {
+	@include experimental(column-width, $width,
+		-moz, -webkit, -o, -ms, not(-khtml), official
+	);
+}
+
+// Specify the width of the rule between columns e.g. `1px`
+@mixin column-rule-width($width) {
+	@include experimental(column-rule-width, $width,
+		-moz, -webkit, -o, -ms, not(-khtml), official
+	);
+}
+
+// Specify the style of the rule between columns e.g. `dotted`.
+// This works like border-style.
+@mixin column-rule-style($style) {
+	@include experimental(column-rule-style, unquote($style),
+		-moz, -webkit, -o, -ms, not(-khtml), official
+	);
+}
+
+// Specify the color of the rule between columns e.g. `blue`.
+// This works like border-color.
+@mixin column-rule-color($color) {
+	@include experimental(column-rule-color, $color,
+		-moz, -webkit, -o, -ms, not(-khtml), official
+	);
+}
+
+// Mixin encompassing all column rule properties
+// For example:
+//
+//     @include column-rule(1px, solid, #c00)
+//
+// Or the values can be space separated:
+//
+//     @include column-rule(1px solid #c00)
+@mixin column-rule($width, $style: false, $color: false) {
+	$full : -compass-space-list(compact($width, $style, $color));
+	@include experimental(column-rule, $full,
+		-moz, -webkit, -o, -ms, not(-khtml), official
+	);
+}
+
+// Mixin for setting column-break-before
+//
+// * legal values are auto, always, avoid, left, right, page, column, avoid-page, avoid-column
+//
+//  Example:
+//    h2.before {@include column-break-before(always);}
+//
+//  Which generates:
+//
+//  h2.before {
+//    -webkit-column-break-before: always;
+//    column-break-before: always;}
+@mixin column-break-before($value: auto){
+	@include experimental(column-break-before, $value, not(-moz), -webkit, not(-o), not(-ms), not(-khtml), official );
+}
+
+// Mixin for setting column-break-after
+//
+// * legal values are auto, always, avoid, left, right, page, column, avoid-page, avoid-column
+//
+//  Example:
+//    h2.after {@include column-break-after(always); }
+//
+//  Which generates:
+//
+//  h2.after {
+//    -webkit-column-break-after: always;
+//    column-break-after: always; }
+@mixin column-break-after($value: auto){
+	@include experimental(column-break-after, $value, not(-moz), -webkit, not(-o), not(-ms), not(-khtml), official );
+}
+
+// Mixin for setting column-break-inside
+//
+// * legal values are auto, avoid, avoid-page, avoid-column
+//
+//  Example:
+//    h2.inside {@include column-break-inside();}
+//  Which generates:
+//
+//  h2.inside {
+//    -webkit-column-break-inside: auto;
+//    column-break-inside: auto;}
+@mixin column-break-inside($value: auto){
+	@include experimental(column-break-inside, $value, not(-moz), -webkit, not(-o), not(-ms), not(-khtml), official );
+}
+
+// All-purpose mixin for setting column breaks.
+//
+// * legal values for $type : before, after, inside
+// * legal values for '$value' are dependent on $type
+//    * when $type = before, legal values are auto, always, avoid, left, right, page, column, avoid-page, avoid-column
+//    * when $type = after, legal values are auto, always, avoid, left, right, page, column, avoid-page, avoid-column
+//    * when $type = inside, legal values are auto, avoid, avoid-page, avoid-column
+//
+//  Examples:
+//    h2.before {@include column-break(before, always);}
+//    h2.after {@include column-break(after, always); }
+//    h2.inside {@include column-break(inside); }
+//
+//  Which generates:
+//  h2.before {
+//    -webkit-column-break-before: always;
+//    column-break-before: always;}
+//
+//  h2.after {
+//    -webkit-column-break-after: always;
+//    column-break-after: always; }
+//
+//  h2.inside {
+//    -webkit-column-break-inside: auto;
+//    column-break-inside: auto;}
+
+@mixin column-break($type: before, $value: auto){
+	@include experimental("column-break-#{$type}", $value, not(-moz), -webkit, not(-o), not(-ms), not(-khtml), official );
+}
+
+// Flexbox
+
+
+// This is the underlying implementation for all the other mixins in this module.
+// It is the only way to access prefix support for older versions of the spec.
+// Deviates from canonical Compass implementation by dropping support for
+// older versions of the Flexbox spec.
+//
+// `$properties`: map of property-value pairs that should be prefixed
+@mixin flexbox($properties) {
+	@each $prop, $value in $properties {
+		@if $prop == display {
+			@include experimental-value(display, $value, not(-moz), -webkit,
+				not(-o), not(-ms), not(-khtml), official);
+		} @else {
+			@include experimental($prop, $value, not(-moz), -webkit, not(-o),
+				not(-ms), not(-khtml), official);
+		}
+	}
+}
+
+// Values for $display are: flex (default), inline-flex
+@mixin display-flex($display: flex) {
+	@include flexbox((display: $display));
+}
+
+// Values: row | row-reverse | column | column-reverse
+@mixin flex-direction($direction) {
+	@include flexbox((flex-direction: $direction));
+}
+
+// Values: nowrap | wrap | wrap-reverse
+@mixin flex-wrap($wrap) {
+	@include flexbox((flex-wrap: $wrap));
+}
+
+// Shorthand for flex-direction and flex-wrap.
+@mixin flex-flow($flow) {
+	@include flexbox((flex-flow: $flow));
+}
+
+// Accepts an integer
+@mixin order($order) {
+	@include flexbox((order: $order));
+}
+
+// Shorthand for flex-grow, flex-shrink and optionally flex-basis.
+// Space separated, in that order.
+@mixin flex($flex) {
+	@include flexbox((flex: $flex));
+}
+
+// Accepts a number.
+@mixin flex-grow($flex-grow) {
+	@include flexbox((flex-grow: $flex-grow));
+}
+
+// Accepts a number.
+@mixin flex-shrink($flex-shrink) {
+	@include flexbox((flex-shrink: $flex-shrink));
+}
+
+// Accepts any legal value for the width property.
+@mixin flex-basis($flex-basis) {
+	@include flexbox((flex-basis: $flex-basis));
+}
+
+// Legal values: flex-start | flex-end | center | space-between | space-around
+@mixin justify-content($justify-content) {
+	@include flexbox((justify-content: $justify-content));
+}
+
+// Legal values: flex-start | flex-end | center | baseline | stretch
+@mixin align-items($align-items) {
+	@include flexbox((align-items: $align-items));
+}
+
+// Legal values: auto | flex-start | flex-end | center | baseline | stretch
+@mixin align-self($align-self) {
+	@include flexbox((align-self: $align-self));
+}
+
+// Legal values: flex-start | flex-end | center | space-between | space-around | stretch
+@mixin align-content($align-content) {
+	@include flexbox((align-content: $align-content));
+}
+
+// Gradient
+
+@mixin linear-gradient($angle, $color-stops...) {
+	$_angle-with-vendor-prefix: "";
+	$_angle: "";
+	@if $angle == "to top" or $angle == "bottom" {
+		$_angle-with-vendor-prefix: bottom;
+		$_angle: to top;
+	} @else if $angle == "to right" or $angle == "left" {
+		$_angle-with-vendor-prefix: left;
+		$_angle: to right;
+	} @else if $angle == "to bottom" or $angle == "top" {
+		$_angle-with-vendor-prefix: top;
+		$_angle: to bottom;
+	} @else if $angle == "to left" or $angle == "right" {
+		$_angle-with-vendor-prefix: right;
+		$_angle: to left;
+	} @else if $angle == "to top right" or $angle == "bottom left" {
+		$_angle-with-vendor-prefix: bottom left;
+		$_angle: to top right;
+	} @else if $angle == "to bottom right" or $angle == "top left" {
+		$_angle-with-vendor-prefix: top left;
+		$_angle: to bottom right;
+	} @else if $angle == "to bottom left" or $angle == "top right" {
+		$_angle-with-vendor-prefix: top right;
+		$_angle: to bottom left;
+	} @else if $angle == "to top left" or $angle == "bottom right" {
+		$_angle-with-vendor-prefix: bottom right;
+		$_angle: to top left;
+	} @else {
+		$_angle-with-vendor-prefix: $angle % 360;
+		$_angle: (90 - $angle) % 360;
+	}
+	background: -webkit-linear-gradient($_angle-with-vendor-prefix, $color-stops);
+	background: -moz-linear-gradient($_angle-with-vendor-prefix, $color-stops);
+	background: -o-linear-gradient($_angle-with-vendor-prefix, $color-stops);
+	background: linear-gradient($_angle, $color-stops);
+}
+
+// Transform
+
+
+// @doc off
+// Note ----------------------------------------------------------------------
+// Safari, Chrome, and Firefox all support 3D transforms. However,
+// only in the most recent builds. You should also provide fallback 2d support for
+// Opera and IE. IE10 is slated to have 3d enabled, but is currently unreleased.
+// To make that easy, all 2D transforms include an browser-targeting toggle ($only3d)
+// to switch between the two support lists. The toggle defaults to 'false' (2D),
+// and also accepts 'true' (3D). Currently the lists are as follows:
+// 2D: Mozilla, Webkit, Opera, Official
+// 3D: Webkit, Firefox.
+
+// Available Transforms ------------------------------------------------------
+// - Scale (2d and 3d)
+// - Rotate (2d and 3d)
+// - Translate (2d and 3d)
+// - Skew (2d only)
+
+// Transform Parameters ------------------------------------------------------
+// - Transform Origin (2d and 3d)
+// - Perspective (3d)
+// - Perspective Origin (3d)
+// - Transform Style (3d)
+// - Backface Visibility (3d)
+
+// Mixins --------------------------------------------------------------------
+// transform-origin
+//  - shortcuts:  transform-origin2d, transform-origin3d
+//  - helpers:    apply-origin
+// transform
+//  - shortcuts:  transform2d, transform3d
+//  - helpers:    simple-transform, create-transform
+// perspective
+//  - helpers:    perspective-origin
+// transform-style
+// backface-visibility
+// scale
+//  - shortcuts:  scaleX, scaleY, scaleZ, scale3d
+// rotate
+//  - shortcuts:  rotateX, rotateY, rotate3d
+// translate
+//  - shortcuts:  translateX, translateY, translateZ, translate3d
+// skew
+//  - shortcuts:  skewX, skewY
+
+// Defaults ------------------------------------------------------------------
+// @doc on
+
+// The default x-origin for transforms
+$default-origin-x    : 50%                   !default;
+// The default y-origin for transforms
+$default-origin-y    : 50%                   !default;
+// The default z-origin for transforms
+$default-origin-z    : 50%                   !default;
+
+
+// The default x-multiplier for scaling
+$default-scale-x     : 1.25                  !default;
+// The default y-multiplier for scaling
+$default-scale-y     : $default-scale-x      !default;
+// The default z-multiplier for scaling
+$default-scale-z     : $default-scale-x      !default;
+
+
+// The default angle for rotations
+$default-rotate      : 45deg                 !default;
+
+
+// The default x-vector for the axis of 3d rotations
+$default-vector-x    : 1                     !default;
+// The default y-vector for the axis of 3d rotations
+$default-vector-y    : 1                     !default;
+// The default z-vector for the axis of 3d rotations
+$default-vector-z    : 1                     !default;
+
+
+// The default x-length for translations
+$default-translate-x : 1em                   !default;
+// The default y-length for translations
+$default-translate-y : $default-translate-x  !default;
+// The default z-length for translations
+$default-translate-z : $default-translate-x  !default;
+
+
+// The default x-angle for skewing
+$default-skew-x      : 5deg                  !default;
+// The default y-angle for skewing
+$default-skew-y      : 5deg                  !default;
+
+
+// **Transform-origin**
+// Transform-origin sent as a complete string
+//
+//     @include apply-origin( origin [, 3D-only ] )
+//
+// where 'origin' is a space separated list containing 1-3 (x/y/z) coordinates
+// in percentages, absolute (px, cm, in, em etc..) or relative
+// (left, top, right, bottom, center) units
+//
+// @param only3d Set this to true to only apply this
+// mixin where browsers have 3D support.
+@mixin apply-origin($origin, $only3d) {
+	$only3d: $only3d or -compass-list-size(-compass-list($origin)) > 2;
+	@if $only3d {
+		@include experimental(transform-origin, $origin,
+			-moz, -webkit, -o, -ms, not(-khtml), official
+		);
+	} @else {
+		@include experimental(transform-origin, $origin,
+			-moz, -webkit, -o, -ms, not(-khtml), official
+		);
+	}
+}
+
+// Transform-origin sent as individual arguments:
+//
+//     @include transform-origin( [ origin-x, origin-y, origin-z, 3D-only ] )
+//
+// where the 3 'origin-' arguments represent x/y/z coordinates.
+//
+// **NOTE:** setting z coordinates triggers 3D support list, leave false for 2D support
+@mixin transform-origin(
+	$origin-x: $default-origin-x,
+	$origin-y: $default-origin-y,
+	$origin-z: false,
+	$only3d:   if($origin-z, true, false)
+) {
+	$origin: unquote('');
+	@if $origin-x or $origin-y or $origin-z {
+		@if $origin-x { $origin: $origin-x; } @else { $origin: 50%; }
+		@if $origin-y { $origin: $origin $origin-y; } @else { @if $origin-z { $origin: $origin 50%; }}
+		@if $origin-z { $origin: $origin $origin-z; }
+		@include apply-origin($origin, $only3d);
+	}
+}
+
+
+// Transform sent as a complete string:
+//
+//     @include transform( transforms [, 3D-only ] )
+//
+// where 'transforms' is a space separated list of all the transforms to be applied.
+@mixin transform(
+	$transform,
+	$only3d: false
+) {
+	@if $only3d {
+		@include experimental(transform, $transform,
+			-moz, -webkit, -o, -ms, not(-khtml), official
+		);
+	} @else {
+		@include experimental(transform, $transform,
+			-moz, -webkit, -o, -ms, not(-khtml), official
+		);
+	}
+}
+
+// Shortcut to target all browsers with 2D transform support
+@mixin transform2d($trans) {
+	@include transform($trans, false);
+}
+
+// Shortcut to target only browsers with 3D transform support
+@mixin transform3d($trans) {
+	@include transform($trans, true);
+}
+
+// @doc off
+// 3D Parameters -------------------------------------------------------------
+// @doc on
+
+// Set the perspective of 3D transforms on the children of an element:
+//
+//      @include perspective( perspective )
+//
+// where 'perspective' is a unitless number representing the depth of the
+// z-axis. The higher the perspective, the more exaggerated the foreshortening.
+// values from 500 to 1000 are more-or-less "normal" - a good starting-point.
+@mixin perspective($p) {
+	@include experimental(perspective, $p,
+		-moz, -webkit, -o, -ms, not(-khtml), official
+	);
+}
+
+// Set the origin position for the perspective
+//
+//      @include perspective-origin(origin-x [origin-y])
+//
+// where the two arguments represent x/y coordinates
+@mixin perspective-origin($origin: 50%) {
+	@include experimental(perspective-origin, $origin,
+		-moz, -webkit, -o, -ms, not(-khtml), official
+	);
+}
+
+// Determine whether a 3D objects children also live in the given 3D space
+//
+//      @include transform-style( [ style ] )
+//
+// where `style` can be either `flat` or `preserve-3d`.
+// Browsers default to `flat`, mixin defaults to `preserve-3d`.
+@mixin transform-style($style: preserve-3d) {
+	@include experimental(transform-style, $style,
+		-moz, -webkit, -o, -ms, not(-khtml), official
+	);
+}
+
+// Determine the visibility of an element when it's back is turned
+//
+//     @include backface-visibility( [ visibility ] )
+//
+// where `visibility` can be either `visible` or `hidden`.
+// Browsers default to visible, mixin defaults to hidden
+@mixin backface-visibility($visibility: hidden) {
+	@include experimental(backface-visibility, $visibility,
+		-moz, -webkit, -o, -ms, not(-khtml), official
+	);
+}
+
+// @doc off
+// Transform Partials --------------------------------------------------------
+// These work well on their own, but they don't add to each other, they override.
+// Use along with transform parameter mixins to adjust origin, perspective and style
+// ---------------------------------------------------------------------------
+
+
+// Scale ---------------------------------------------------------------------
+// @doc on
+
+// Scale an object along the x and y axis:
+//
+//      @include scale( [ scale-x, scale-y, perspective, 3D-only ] )
+//
+// where the 'scale-' arguments are unitless multipliers of the x and y dimensions
+// and perspective, which works the same as the stand-alone perspective property/mixin
+// but applies to the individual element (multiplied with any parent perspective)
+//
+// **Note** This mixin cannot be combined with other transform mixins.
+@mixin scale(
+	$scale-x:     $default-scale-x,
+	$scale-y:     $scale-x,
+	$perspective: false,
+	$only3d:      false
+) {
+	$trans: scale($scale-x, $scale-y);
+	@if $perspective { $trans: perspective($perspective) $trans; }
+	@include transform($trans, $only3d);
+}
+
+// Scale an object along the x axis
+// @include scaleX( [ scale-x, perspective, 3D-only ] )
+//
+// **Note** This mixin cannot be combined with other transform mixins.
+@mixin scaleX(
+	$scale:       $default-scale-x,
+	$perspective: false,
+	$only3d:      false
+) {
+	$trans: scaleX($scale);
+	@if $perspective { $trans: perspective($perspective) $trans; }
+	@include transform($trans, $only3d);
+}
+
+// Scale an object along the y axis
+// @include scaleY( [ scale-y, perspective, 3D-only ] )
+//
+// **Note** This mixin cannot be combined with other transform mixins.
+@mixin scaleY(
+	$scale:       $default-scale-y,
+	$perspective: false,
+	$only3d:      false
+) {
+	$trans: scaleY($scale);
+	@if $perspective { $trans: perspective($perspective) $trans; }
+	@include transform($trans, $only3d);
+}
+
+// Scale an object along the z axis
+// @include scaleZ( [ scale-z, perspective ] )
+//
+// **Note** This mixin cannot be combined with other transform mixins.
+@mixin scaleZ(
+	$scale: $default-scale-z,
+	$perspective: false
+) {
+	$trans: scaleZ($scale);
+	@if $perspective { $trans: perspective($perspective) $trans; }
+	@include transform3d($trans);
+}
+
+// Scale and object along all three axis
+// @include scale3d( [ scale-x, scale-y, scale-z, perspective ] )
+//
+// **Note** This mixin cannot be combined with other transform mixins.
+@mixin scale3d(
+	$scale-x:     $default-scale-x,
+	$scale-y:     $default-scale-y,
+	$scale-z:     $default-scale-z,
+	$perspective: false
+) {
+	$trans: scale3d($scale-x, $scale-y, $scale-z);
+	@if $perspective { $trans: perspective($perspective) $trans; }
+	@include transform3d($trans);
+}
+
+// @doc off
+// Rotate --------------------------------------------------------------------
+// @doc on
+
+// Rotate an object around the z axis  (2D)
+// @include rotate( [ rotation, perspective, 3D-only ] )
+// where 'rotation' is an angle set in degrees (deg) or radian (rad) units
+//
+// **Note** This mixin cannot be combined with other transform mixins.
+@mixin rotate(
+	$rotate:      $default-rotate,
+	$perspective: false,
+	$only3d:      false
+) {
+	$trans: rotate($rotate);
+	@if $perspective { $trans: perspective($perspective) $trans; }
+	@include transform($trans, $only3d);
+}
+
+// A longcut for 'rotate' in case you forget that 'z' is implied
+//
+// **Note** This mixin cannot be combined with other transform mixins.
+@mixin rotateZ(
+	$rotate:      $default-rotate,
+	$perspective: false,
+	$only3d:      false
+) {
+	@include rotate($rotate, $perspective, $only3d);
+}
+
+// Rotate an object around the x axis (3D)
+// @include rotateX( [ rotation, perspective ] )
+//
+// **Note** This mixin cannot be combined with other transform mixins.
+@mixin rotateX(
+	$rotate: $default-rotate,
+	$perspective: false
+) {
+	$trans: rotateX($rotate);
+	@if $perspective { $trans: perspective($perspective) $trans; }
+	@include transform3d($trans);
+}
+
+// Rotate an object around the y axis (3D)
+// @include rotate( [ rotation, perspective ] )
+//
+// **Note** This mixin cannot be combined with other transform mixins.
+@mixin rotateY(
+	$rotate: $default-rotate,
+	$perspective: false
+) {
+	$trans: rotateY($rotate);
+	@if $perspective { $trans: perspective($perspective) $trans; }
+	@include transform3d($trans);
+}
+
+// Rotate an object around an arbitrary axis (3D)
+// @include rotate( [ vector-x, vector-y, vector-z, rotation, perspective ] )
+// where the 'vector-' arguments accept unitless numbers.
+// These numbers are not important on their own, but in relation to one another
+// creating an axis from your transform-origin, along the axis of Xx = Yy = Zz.
+//
+// **Note** This mixin cannot be combined with other transform mixins.
+@mixin rotate3d(
+	$vector-x: $default-vector-x,
+	$vector-y: $default-vector-y,
+	$vector-z: $default-vector-z,
+	$rotate: $default-rotate,
+	$perspective: false
+) {
+	$trans: rotate3d($vector-x, $vector-y, $vector-z, $rotate);
+	@if $perspective { $trans: perspective($perspective) $trans; }
+	@include transform3d($trans);
+}
+
+// @doc off
+// Translate -----------------------------------------------------------------
+// @doc on
+
+// Move an object along the x or y axis (2D)
+// @include translate( [ translate-x, translate-y, perspective, 3D-only ] )
+// where the 'translate-' arguments accept any distance in percentages or absolute (px, cm, in, em etc..) units.
+//
+// **Note** This mixin cannot be combined with other transform mixins.
+@mixin translate(
+	$translate-x: $default-translate-x,
+	$translate-y: $default-translate-y,
+	$perspective: false,
+	$only3d:      false
+) {
+	$trans: translate($translate-x, $translate-y);
+	@if $perspective { $trans: perspective($perspective) $trans; }
+	@include transform($trans, $only3d);
+}
+
+// Move an object along the x axis (2D)
+// @include translate( [ translate-x, perspective, 3D-only ] )
+//
+// **Note** This mixin cannot be combined with other transform mixins.
+@mixin translateX(
+	$trans-x:     $default-translate-x,
+	$perspective: false,
+	$only3d:      false
+) {
+	$trans: translateX($trans-x);
+	@if $perspective { $trans: perspective($perspective) $trans; }
+	@include transform($trans, $only3d);
+}
+
+// Move an object along the y axis (2D)
+// @include translate( [ translate-y, perspective, 3D-only ] )
+//
+// **Note** This mixin cannot be combined with other transform mixins.
+@mixin translateY(
+	$trans-y:     $default-translate-y,
+	$perspective: false,
+	$only3d:      false
+) {
+	$trans: translateY($trans-y);
+	@if $perspective { $trans: perspective($perspective) $trans; }
+	@include transform($trans, $only3d);
+}
+
+// Move an object along the z axis (3D)
+// @include translate( [ translate-z, perspective ] )
+//
+// **Note** This mixin cannot be combined with other transform mixins.
+@mixin translateZ(
+	$trans-z:     $default-translate-z,
+	$perspective: false
+) {
+	$trans: translateZ($trans-z);
+	@if $perspective { $trans: perspective($perspective) $trans; }
+	@include transform3d($trans);
+}
+
+// Move an object along the x, y and z axis (3D)
+// @include translate( [ translate-x, translate-y, translate-z, perspective ] )
+//
+// **Note** This mixin cannot be combined with other transform mixins.
+@mixin translate3d(
+	$translate-x: $default-translate-x,
+	$translate-y: $default-translate-y,
+	$translate-z: $default-translate-z,
+	$perspective: false
+) {
+	$trans: translate3d($translate-x, $translate-y, $translate-z);
+	@if $perspective { $trans: perspective($perspective) $trans; }
+	@include transform3d($trans);
+}
+
+// @doc off
+// Skew ----------------------------------------------------------------------
+// @doc on
+
+// Skew an element:
+//
+//     @include skew( [ skew-x, skew-y, 3D-only ] )
+//
+// where the 'skew-' arguments accept css angles in degrees (deg) or radian (rad) units.
+//
+// **Note** This mixin cannot be combined with other transform mixins.
+@mixin skew(
+	$skew-x: $default-skew-x,
+	$skew-y: $default-skew-y,
+	$only3d: false
+) {
+	$trans: skew($skew-x, $skew-y);
+	@include transform($trans, $only3d);
+}
+
+// Skew an element along the x axiz
+//
+//     @include skew( [ skew-x, 3D-only ] )
+//
+// **Note** This mixin cannot be combined with other transform mixins.
+@mixin skewX(
+	$skew-x: $default-skew-x,
+	$only3d: false
+) {
+	$trans: skewX($skew-x);
+	@include transform($trans, $only3d);
+}
+
+// Skew an element along the y axis
+//
+//     @include skew( [ skew-y, 3D-only ] )
+//
+// **Note** This mixin cannot be combined with other transform mixins.
+@mixin skewY(
+	$skew-y: $default-skew-y,
+	$only3d: false
+) {
+	$trans: skewY($skew-y);
+	@include transform($trans, $only3d);
+}
+
+
+// Full transform mixins
+// For settings any combination of transforms as arguments
+// These are complex and not highly recommended for daily use. They are mainly
+// here for backward-compatibility purposes.
+//
+// * they include origin adjustments
+// * scale takes a multiplier (unitless), rotate and skew take degrees (deg)
+//
+// **Note** This mixin cannot be combined with other transform mixins.
+@mixin create-transform(
+	$perspective: false,
+	$scale-x:     false,
+	$scale-y:     false,
+	$scale-z:     false,
+	$rotate-x:    false,
+	$rotate-y:    false,
+	$rotate-z:    false,
+	$rotate3d:    false,
+	$trans-x:     false,
+	$trans-y:     false,
+	$trans-z:     false,
+	$skew-x:      false,
+	$skew-y:      false,
+	$origin-x:    false,
+	$origin-y:    false,
+	$origin-z:    false,
+	$only3d:      false
+) {
+	$trans: unquote("");
+
+	// perspective
+	@if $perspective { $trans: perspective($perspective) ; }
+
+	// scale
+	@if $scale-x and $scale-y {
+		@if $scale-z { $trans: $trans scale3d($scale-x, $scale-y, $scale-z); }
+		@else { $trans: $trans scale($scale-x, $scale-y); }
+	} @else {
+		@if $scale-x { $trans: $trans scaleX($scale-x); }
+		@if $scale-y { $trans: $trans scaleY($scale-y); }
+		@if $scale-z { $trans: $trans scaleZ($scale-z); }
+	}
+
+	// rotate
+	@if $rotate-x { $trans: $trans rotateX($rotate-x); }
+	@if $rotate-y { $trans: $trans rotateY($rotate-y); }
+	@if $rotate-z { $trans: $trans rotateZ($rotate-z); }
+	@if $rotate3d { $trans: $trans rotate3d($rotate3d); }
+
+	// translate
+	@if $trans-x and $trans-y {
+		@if $trans-z { $trans: $trans translate3d($trans-x, $trans-y, $trans-z); }
+		@else { $trans: $trans translate($trans-x, $trans-y); }
+	} @else {
+		@if $trans-x { $trans: $trans translateX($trans-x); }
+		@if $trans-y { $trans: $trans translateY($trans-y); }
+		@if $trans-z { $trans: $trans translateZ($trans-z); }
+	}
+
+	// skew
+	@if $skew-x and $skew-y { $trans: $trans skew($skew-x, $skew-y); }
+	@else {
+		@if $skew-x { $trans: $trans skewX($skew-x); }
+		@if $skew-y { $trans: $trans skewY($skew-y); }
+	}
+
+	// apply it!
+	@include transform($trans, $only3d);
+	@include transform-origin($origin-x, $origin-y, $origin-z, $only3d);
+}
+
+
+// A simplified set of options
+// backwards-compatible with the previous version of the 'transform' mixin
+@mixin simple-transform(
+	$scale:    false,
+	$rotate:   false,
+	$trans-x:  false,
+	$trans-y:  false,
+	$skew-x:   false,
+	$skew-y:   false,
+	$origin-x: false,
+	$origin-y: false
+) {
+	@include create-transform(
+			false,
+			$scale, $scale, false,
+			false, false, $rotate, false,
+			$trans-x, $trans-y, false,
+			$skew-x, $skew-y,
+			$origin-x, $origin-y, false,
+			false
+	);
+}
+// Animation
+
+
+// CSS Animations.
+
+// Apply an animation property and value with the correct browser support
+@mixin animation-support($property, $value) {
+	@include experimental($property, $value, -moz, -webkit, not -o, not -ms, not -khtml, official); }
+
+// Name of any animation as a string.
+$default-animation-name             : false !default;
+
+// Duration of the entire animation in seconds.
+$default-animation-duration         : false !default;
+
+// Delay for start of animation in seconds.
+$default-animation-delay            : false !default;
+
+// The timing function(s) to be used between keyframes. [ease | linear | ease-in | ease-out | ease-in-out | cubic-bezier($number, $number, $number, $number)]
+$default-animation-timing-function  : false !default;
+
+// The number of times an animation cycle is played. [infinite | $number]
+$default-animation-iteration-count  : false !default;
+
+// Whether or not the animation should play in reverse on alternate cycles. [normal | alternate]
+$default-animation-direction        : false !default;
+
+// What values are applied by the animation outside the time it is executing. [none | forwards | backwards | both]
+$default-animation-fill-mode        : false !default;
+
+// Whether the animation is running or paused. [running | paused]
+$default-animation-play-state       : false !default;
+
+// Create a named animation sequence that can be applied to elements later.
+//
+//     $name    - The name of your animation.
+//     @content - The keyframes of the animation.
+@mixin keyframes(
+	$name,
+	$moz: $experimental-support-for-mozilla,
+	$webkit: $experimental-support-for-webkit,
+	$o: $experimental-support-for-opera,
+	$ms: $experimental-support-for-microsoft,
+	$khtml: $experimental-support-for-khtml,
+	$official: true
+) {
+	@if $moz {
+		@include with-only-support-for($moz: true) {
+			@-moz-keyframes #{$name} { @content; }
+		}
+	}
+	@if $webkit {
+		@include with-only-support-for($webkit: true) {
+			@-webkit-keyframes #{$name} { @content; }
+		}
+	}
+	@if $official {
+		@include with-only-support-for {
+			@keyframes #{$name} { @content; }
+		}
+	}
+}
+
+// Apply 1-10 animation names.
+@mixin animation-name($name-1: $default-animation-name, $name-2: false, $name-3: false, $name-4: false, $name-5: false, $name-6: false, $name-7: false, $name-8: false, $name-9: false, $name-10: false) {
+	$name: compact($name-1, $name-2, $name-3, $name-4, $name-5, $name-6, $name-7, $name-8, $name-9, $name-10);
+	@include animation-support(animation-name, $name); }
+
+// Apply 1-10 animation durations.
+@mixin animation-duration($duration-1: $default-animation-duration, $duration-2: false, $duration-3: false, $duration-4: false, $duration-5: false, $duration-6: false, $duration-7: false, $duration-8: false, $duration-9: false, $duration-10: false) {
+	$duration: compact($duration-1, $duration-2, $duration-3, $duration-4, $duration-5, $duration-6, $duration-7, $duration-8, $duration-9, $duration-10);
+	@include animation-support(animation-duration, $duration); }
+
+// Apply 1-10 animation delays.
+@mixin animation-delay($delay-1: $default-animation-delay, $delay-2: false, $delay-3: false, $delay-4: false, $delay-5: false, $delay-6: false, $delay-7: false, $delay-8: false, $delay-9: false, $delay-10: false) {
+	$delay: compact($delay-1, $delay-2, $delay-3, $delay-4, $delay-5, $delay-6, $delay-7, $delay-8, $delay-9, $delay-10);
+	@include animation-support(animation-delay, $delay); }
+
+// Apply 1-10 animation timing functions.
+@mixin animation-timing-function($function-1: $default-animation-timing-function, $function-2: false, $function-3: false, $function-4: false, $function-5: false, $function-6: false, $function-7: false, $function-8: false, $function-9: false, $function-10: false) {
+	$function: compact($function-1, $function-2, $function-3, $function-4, $function-5, $function-6, $function-7, $function-8, $function-9, $function-10);
+	@include animation-support(animation-timing-function, $function); }
+
+// Apply 1-10 animation iteration counts.
+@mixin animation-iteration-count($count-1: $default-animation-iteration-count, $count-2: false, $count-3: false, $count-4: false, $count-5: false, $count-6: false, $count-7: false, $count-8: false, $count-9: false, $count-10: false) {
+	$count: compact($count-1, $count-2, $count-3, $count-4, $count-5, $count-6, $count-7, $count-8, $count-9, $count-10);
+	@include animation-support(animation-iteration-count, $count); }
+
+// Apply 1-10 animation directions.
+@mixin animation-direction($direction-1: $default-animation-direction, $direction-2: false, $direction-3: false, $direction-4: false, $direction-5: false, $direction-6: false, $direction-7: false, $direction-8: false, $direction-9: false, $direction-10: false) {
+	$direction: compact($direction-1, $direction-2, $direction-3, $direction-4, $direction-5, $direction-6, $direction-7, $direction-8, $direction-9, $direction-10);
+	@include animation-support(animation-direction, $direction); }
+
+// Apply 1-10 animation fill modes.
+@mixin animation-fill-mode($mode-1: $default-animation-fill-mode, $mode-2: false, $mode-3: false, $mode-4: false, $mode-5: false, $mode-6: false, $mode-7: false, $mode-8: false, $mode-9: false, $mode-10: false) {
+	$mode: compact($mode-1, $mode-2, $mode-3, $mode-4, $mode-5, $mode-6, $mode-7, $mode-8, $mode-9, $mode-10);
+	@include animation-support(animation-fill-mode, $mode); }
+
+// Apply 1-10 animation play states.
+@mixin animation-play-state($state-1: $default-animation-play-state, $state-2: false, $state-3: false, $state-4: false, $state-5: false, $state-6: false, $state-7: false, $state-8: false, $state-9: false, $state-10: false) {
+	$state: compact($state-1, $state-2, $state-3, $state-4, $state-5, $state-6, $state-7, $state-8, $state-9, $state-10);
+	@include animation-support(animation-play-state, $state); }
+
+// Shortcut to apply a named animation to an element, with all the settings.
+//
+//     $animation-1   : Name and settings for the first animation. [<values> | default]
+//     ...
+//     $animation-10  : Name and settings for the tenth animation. <values>
+@mixin animation($animation-1: default, $animation-2: false, $animation-3: false, $animation-4: false, $animation-5: false, $animation-6: false, $animation-7: false, $animation-8: false, $animation-9: false, $animation-10: false) {
+	@if $animation-1 == default {
+		$animation-1: -compass-space-list(compact($default-animation-name, $default-animation-duration, $default-animation-timing-function, $default-animation-delay, $default-animation-iteration-count, $default-animation-direction, $default-animation-fill-mode, $default-animation-play-state)); }
+	$animation: compact($animation-1, $animation-2, $animation-3, $animation-4, $animation-5, $animation-6, $animation-7, $animation-8, $animation-9, $animation-10);
+	@include animation-support(animation, $animation); }
+
+// Filters
+
+// Provides cross-browser support for the upcoming (?) css3 filter property.
+//
+// Each filter argument should adhere to the standard css3 syntax for the
+// filter property.
+@mixin filter (
+	$filter-1,
+	$filter-2 : false,
+	$filter-3 : false,
+	$filter-4 : false,
+	$filter-5 : false,
+	$filter-6 : false,
+	$filter-7 : false,
+	$filter-8 : false,
+	$filter-9 : false,
+	$filter-10: false
+) {
+	$filter : compact($filter-1, $filter-2, $filter-3, $filter-4, $filter-5, $filter-6, $filter-7, $filter-8, $filter-9, $filter-10);
+	@include experimental(filter, $filter,
+		-moz, -webkit, not(-o), not(-ms), not(-khtml), official
+	);
+}
+
+// User interface
+
+
+// This property controls the selection model and granularity of an element.
+//
+// @param $select
+//   [ none | text | toggle | element | elements | all | inherit ]
+@mixin user-select($select) {
+	$select: unquote($select);
+	@include experimental(user-select, $select,
+		-moz, -webkit, not(-o), -ms, -khtml, official
+	);
+}
+
+// Style the html5 input placeholder in browsers that support it.
+//
+// The styles for the input placeholder are passed as mixin content
+// and the selector comes from the mixin's context.
+//
+// For example:
+//
+//     #{elements-of-type(text-input)} {
+//       @include input-placeholder {
+//         color: #bfbfbf;
+//         font-style: italic;
+//       }
+//     }
+//
+// if you want to apply the placeholder styles to all elements supporting
+// the `input-placeholder` pseudo class (beware of performance impacts):
+//
+//     * {
+//       @include input-placeholder {
+//         color: #bfbfbf;
+//         font-style: italic;
+//       }
+//     }
+@mixin input-placeholder {
+	&:-ms-input-placeholder { @content; }
+	&:-moz-placeholder { @content; }
+	&::-moz-placeholder { @content; }
+	&::-webkit-input-placeholder { @content; }
+}

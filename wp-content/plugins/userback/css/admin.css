@@ -1,0 +1,50 @@
+div.userback-container {
+    margin-right: 20px;
+}
+div.userback-container * {
+    box-sizing: border-box;
+}
+div.setting-title {
+    padding: 10px 20px;
+    background-color: #E7E7E7;
+    color: #666666;
+    text-shadow: 0px 1px 1px #FFFFFF;
+}
+form.setting {
+    display: block;
+    padding: 20px;
+    background-color: #FFFFFF;
+    border-radius: 4px;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
+}
+div.setting-row {
+    margin-bottom: 20px;
+    clear: both;
+}
+div.setting-label {
+    float: left;
+    width: 200px;
+}
+div.setting-value {
+    margin-left: 200px;
+}
+form.setting textarea {
+    width: 100%;
+    max-width: 100%;
+    font-family: 'Courier New';
+    white-space: nowrap;
+    color: #b16d15;
+}
+.save-success {
+    margin-left: 5px;
+    animation: fadeIn 0.2s;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}

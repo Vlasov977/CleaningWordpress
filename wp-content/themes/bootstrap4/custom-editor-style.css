@@ -1,0 +1,10 @@
+.custom_button {
+    line-height: 35px;
+    padding: 0 20px;
+    border-radius: 4px;
+    background: #954b52;
+    color: black;
+    display: inline-block;
+    text-decoration: none;
+
+}

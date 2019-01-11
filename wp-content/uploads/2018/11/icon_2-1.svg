@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 75.62 108.816">
+  <defs>
+    <style>
+      .cls-1 {
+      fill: gray;
+      }
+    </style>
+  </defs>
+  <g id="Group_8" data-name="Group 8" transform="translate(0 0)">
+    <circle id="Ellipse_3" data-name="Ellipse 3" class="cls-1" cx="2.623" cy="2.623" r="2.623" transform="translate(16.447 11.635)"/>
+    <circle id="Ellipse_4" data-name="Ellipse 4" class="cls-1" cx="2.623" cy="2.623" r="2.623" transform="translate(0 11.635)"/>
+    <circle id="Ellipse_5" data-name="Ellipse 5" class="cls-1" cx="2.623" cy="2.623" r="2.623" transform="translate(8.585 5.247)"/>
+    <circle id="Ellipse_6" data-name="Ellipse 6" class="cls-1" cx="2.623" cy="2.623" r="2.623" transform="translate(8.585 18.023)"/>
+    <circle id="Ellipse_7" data-name="Ellipse 7" class="cls-1" cx="2.623" cy="2.623" r="2.623"/>
+    <circle id="Ellipse_8" data-name="Ellipse 8" class="cls-1" cx="2.623" cy="2.623" r="2.623" transform="translate(0 24.129)"/>
+    <path id="Path_9" data-name="Path 9" class="cls-1" d="M318.971,365.819l.5.3h34.554l.549-1.309a71.6,71.6,0,0,0,5.565-24.679,73.346,73.346,0,0,0-2-20.275,66.906,66.906,0,0,0-7.454-18.9l-.629-.985h-16.8V302.1c0,11.087-4.883,15.909-10.052,21.014-4.649,4.59-9.456,9.338-10.427,18.4-.844,7.875-.158,14.272,2.039,19.011C316.576,364.324,318.731,365.677,318.971,365.819Zm28.706-61.583a68.208,68.208,0,0,1,6.353,16.776,70.695,70.695,0,0,1,1.36,7.472H345.019a77.9,77.9,0,0,0-.073-24.248ZM326.2,326.152c5-4.941,10.637-10.506,11.264-21.917h3.16a73.541,73.541,0,0,1,.067,24.248H323.881C324.627,327.709,325.405,326.94,326.2,326.152Z" transform="translate(-284.585 -257.299)"/>
+    <path id="Path_10" data-name="Path 10" class="cls-1" d="M302.206,68.106h3.6V55.331h-3.6a2.98,2.98,0,0,0-2.98,2.98v6.816A2.98,2.98,0,0,0,302.206,68.106Z" transform="translate(-273.261 -47.461)"/>
+    <path id="Path_11" data-name="Path 11" class="cls-1" d="M334.96,171.242c-.2-.167-.4-.32-.6-.463a9.725,9.725,0,0,0-3.206-1.155s-2.069,13.045-6.118,17.094,2.339,5.4,5.218-.9c2.829-6.19,7.221-7.859,8.738-7.915a21.8,21.8,0,0,0-.837-2.155A12.7,12.7,0,0,0,334.96,171.242Z" transform="translate(-294.277 -145.496)"/>
+    <path id="Path_12" data-name="Path 12" class="cls-1" d="M395.946,84.841c0-12.644,6.556-15.84,10.07-16.645a1.392,1.392,0,0,0,.794-2.2c-6.892-9.085-14.711-10.666-18.421-10.666H367.516V68.286c11.876,0,13.315,16.554,13.315,16.554Z" transform="translate(-331.837 -47.461)"/>
+  </g>
+</svg>

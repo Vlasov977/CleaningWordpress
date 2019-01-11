@@ -1,0 +1,1100 @@
+@import "inc/mixins";
+@import "inc/vars";
+@import "inc/slider"; //comment this line if you don't use slider
+//@import "inc/bootstrap"; // uncomment this line to use custom row width and column paddings
+
+/* -----------------------------------------
+   WordPress Core Classes
+----------------------------------------- */
+.alignnone {
+  margin: 0 1em 1em 0;
+}
+
+.alignright {
+  float: right;
+  margin: 0 0 1em 1em;
+}
+
+.alignleft {
+  float: left;
+  margin: 0 1em 1em 0;
+}
+
+.aligncenter {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 1em;
+}
+
+.wp-caption {
+  background: #fff;
+  border: 1px solid #f0f0f0;
+  max-width: 100%; /* Image does not overflow the content area */
+  padding: 5px 5px 10px;
+  text-align: center;
+  img {
+    width: auto;
+    margin-bottom: 10px;
+  }
+  p {
+    margin-bottom: 0;
+    font-size: 14px;
+  }
+}
+
+.gallery-caption {
+  font-size: 12px;
+}
+
+#wpadminbar {
+  opacity: 0.3;
+  transition: 0.2s opacity linear;
+  -webkit-transform: translateZ(0);
+  &:hover, &:focus {
+    opacity: 1;
+  }
+}
+
+/* -----------------------------------------
+    Contact Form
+----------------------------------------- */
+
+/*basic Gravity Form styles and fixes, if you dont need/use this comment or delete styles below*/
+@import "inc/gform";
+
+/* -----------------------------------------
+   General fixes
+----------------------------------------- */
+
+html, body {
+  height: auto;
+}
+
+html {
+  min-height: 100%;
+  position: relative;
+}
+
+body {
+  position: relative;
+
+}
+
+/* Placeholder styling */
+
+input, textarea {
+  @include input-placeholder {
+    color: #555;
+    opacity: 1;
+  }
+}
+
+/* Input Styling */
+[type=color],
+[type=date],
+[type=datetime-local],
+[type=datetime],
+[type=email],
+[type=month],
+[type=number],
+[type=password],
+[type=search],
+[type=tel],
+[type=text],
+[type=time],
+[type=url],
+[type=week],
+textarea,
+select {
+  /* STYLES GO THERE */
+  margin-bottom: 0;
+}
+
+textarea[rows] {
+  /*Styles for TextArea*/
+  height: 150px;
+  max-width: 100%;
+}
+
+[type=number] {
+  -moz-appearance: textfield;
+}
+
+[type=number]::-webkit-inner-spin-button,
+[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+[type=checkbox],
+[type=file],
+[type=radio] {
+  margin-bottom: 0;
+}
+
+label {
+  display: block;
+  font-size: inherit;
+}
+
+button, .button, .btn, input[type='submit'], input[type='reset'] {
+  border: 2px solid $green;
+  padding: 10px 20px;
+  margin-bottom: 0;
+  background-color: white;
+  color: $green;
+  font-family: $font;
+  transition: all .3s ease-in-out;
+  &:hover, &:focus {
+    background-color: darken($main_color, 10);
+  }
+}
+
+/* Button additional styles */
+
+.button {
+
+  &:hover, &:focus {
+    /*basic hover and focus effects*/
+  }
+}
+
+/* -----------------------------------------
+   Typography
+----------------------------------------- */
+body {
+  color: $text_color;
+  font-family: $font;
+}
+
+body, h1, h2, h3, h4, h5, h6, p, a {
+
+}
+
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6 {
+  font-family: $font;
+  font-weight: 700;
+
+  color: inherit;
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+h1, .h1 {
+  /*basic heading styles*/
+  font-size: 60px;
+  font-weight: bold;
+}
+
+h2, .h2 {
+  /*basic heading styles*/
+  font-size: 50px;
+  font-weight: bold;
+}
+
+h3, .h3 {
+  /*basic heading styles*/
+  font-size: 40px;
+  font-weight: bold;
+  color: white;
+}
+
+h4, .h4 {
+  /*basic heading styles*/
+  font-size: 45px;
+  font-weight: bold;
+}
+
+h5, .h5 {
+  /*basic heading styles*/
+  font-size: 25px;
+}
+
+h6, .h6 {
+  /*basic heading styles*/
+}
+
+p {
+  font-family: $font;
+  font-size: 16px;
+  /*basic paragraph styles*/
+  &:last-child {
+    margin-bottom: 0;
+  }
+  &:empty {
+    display: none;
+  }
+  a {
+    font-family: $font;
+    text-decoration: underline;
+  }
+}
+
+ul {
+  /*basic list styles*/
+  font-size: inherit;
+  li {
+    /*basic list-item styles*/
+  }
+}
+
+a {
+  font-family: $font;
+  color: $main_color;
+  transition: all .3s ease-in-out;
+  -webkit-transition: all .3s ease-in-out;
+
+  &:hover, &:focus {
+    /*basic hover and focus effects*/
+    color: darken($main_color, 20);
+    outline: none;
+  }
+}
+
+blockquote {
+  margin: 0 0 1rem;
+  padding: .5625rem 1.25rem 0 1.1875rem;
+  border-left: 1px solid #cacaca
+}
+
+blockquote, blockquote p {
+  line-height: 1.6;
+  color: #8a8a8a
+}
+
+table {
+  width: 100%;
+  margin-bottom: 1rem;
+  border-radius: 0;
+  background-color: #fff;
+  border-collapse: collapse;
+  tbody, tfoot, thead, th, td {
+    border: 1px solid #f1f1f1;
+    background-color: transparent;
+  }
+  tfoot, thead {
+    tr {
+      background-color: #f8f8f8
+    }
+    td, th {
+      padding: .5rem .625rem .625rem;
+      font-weight: 700;
+      text-align: left
+    }
+  }
+  tbody {
+    td, th {
+      padding: .5rem .625rem .625rem
+    }
+  }
+}
+
+/* ------------------------------------
+    Basic Styles
+------------------------------------- */
+
+/* Preloader */
+
+@include keyframes(spin) {
+  100% {
+    @include transform(rotate(360deg));
+  }
+}
+
+.container {
+  max-width: 90%;
+}
+
+.preloader {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: #fff9e9;
+  color: #000;
+  z-index: 100000000;
+  opacity: 1;
+  visibility: visible;
+  transition: 1s ease;
+  &__icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    @include transform(translate(-50%, -50%));
+    &:before {
+      display: block;
+      content: '\f1ce';
+      font-size: 40px;
+      font-weight: 900;
+      font-family: $fa;
+      color: $green;
+      @include animation(spin 1s ease-in-out infinite);
+
+    }
+  }
+  &--hidden {
+    left: 120vw;
+
+  }
+}
+
+/* Clearfix */
+
+.clearfix {
+  zoom: 1;
+  &:before, &:after {
+    content: "";
+    display: table;
+    height: 0;
+    overflow: hidden;
+  }
+  &:after {
+    clear: both;
+  }
+}
+
+/* Align Middle */
+.align-middle {
+  @include align-middle();
+}
+
+/* Pagination */
+
+ul.pagination {
+  .pagination {
+    display: block;
+    color: $text_color;
+    background-color: transparent;
+    border: 2px solid $light_gray;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    &.current {
+      color: #fff;
+      background: $main_color;
+      border-color: $main_color;
+      //display: block;
+    }
+  }
+
+}
+
+/* Search form */
+
+#searchform {
+  //position: relative;
+}
+
+#s {
+  //padding-right: 75px;
+}
+
+#searchsubmit {
+  height: auto;
+  cursor: pointer;
+  //font-size: 0;
+  &:after {
+    //content: "\f002";
+    font-family: $fa;
+    font-weight: 900;
+    font-size: 20px;
+  }
+}
+
+//use @extend %bgcover; to selector if you need background cover;
+%bgcover {
+  background-size: cover;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+}
+
+.bg-cover {
+  @extend %bgcover;
+}
+
+//use @extend %bgcontain; to selector if you need contain image in block;
+%bgcontain {
+  background-size: contain;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+}
+
+.bg-contain {
+  @extend %bgcontain;
+}
+
+/* ------------------------------------
+    Header Styles
+------------------------------------- */
+
+.header {
+  margin-bottom: 30px;
+  position: fixed;
+  width: 337px;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  background-image: url("../images/sofa1.png");
+  background-size: 80%;
+  background-position: center bottom 10px;
+  background-repeat: no-repeat;
+}
+
+.logo {
+  img {
+    max-height: 150px;
+  }
+}
+
+/* ------------------------------------
+    Content Styles
+------------------------------------- */
+
+/* Blog page */
+
+.posts-list {
+  article {
+    padding-bottom: 20px;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 20px;
+  }
+  .entry-meta {
+    margin-bottom: 0;
+  }
+  #searchform {
+    margin-bottom: 40px;
+  }
+}
+
+.entry-meta {
+  color: #666;
+  font-size: 14px;
+}
+
+.thumbnail {
+  margin-bottom: 20px;
+}
+
+/* Comments block */
+
+.comments-area {
+  margin-top: 50px;
+}
+
+.comment-list {
+  @include list-unstyled;
+}
+
+.comment-meta {
+  font-size: 14px;
+}
+
+.comment-metadata {
+  color: #666;
+}
+
+.comment-content {
+  font-size: 14px;
+  padding-left: 25px;
+  margin-top: 20px;
+  border-left: 1px solid #ddd;
+}
+
+.reply {
+  text-align: right;
+}
+
+.comment-reply-link {
+  display: inline-block;
+  padding: .33333rem .5rem;
+  font-size: .8rem;
+  line-height: 1;
+  white-space: nowrap;
+  border-radius: 0;
+  background: #777;
+  color: #fefefe;
+}
+
+/* 404 page */
+
+.not-found {
+  padding-top: 200px;
+  padding-bottom: 200px;
+
+  .label {
+    text-decoration: none;
+    cursor: pointer;
+    background-color: $main_color;
+    &:hover {
+      background-color: darken($main_color, 8);
+      color: #fff;
+    }
+  }
+}
+
+/* Sidebar */
+
+.widget {
+  margin-bottom: 20px;
+}
+
+/* Buttons */
+
+.custom_button {
+  line-height: 68px;
+  display: flex;
+  padding: 0 60px;
+  font-size: 30px;
+  font-weight: bold;
+  border: 2px solid black;
+  color: black;
+  text-align: center;
+  margin: 15px 0;
+  cursor: pointer;
+  &--green {
+    border-color: $green;
+    color: $green;
+    transition-duration: 0.3s;
+    &:hover {
+      transition-duration: 0.3s;
+      background: $green;
+      color: white;
+    }
+  }
+  &--white {
+    border-color: white;
+    color: white;
+    transition-duration: 0.3s;
+    &:hover {
+      transition-duration: 0.3s;
+      background: white;
+      color: $green;
+    }
+  }
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+/* Custom Title */
+
+.custom_title {
+  font-size: 50px;
+  font-weight: bold;
+  display: block;
+  width: 100%;
+  &--green {
+    color: $green !important;
+    .line {
+      background: $green;
+    }
+  }
+  &--yellow {
+    color: $yellow !important;
+    .line {
+      background: $yellow;
+    }
+  }
+  .lines_wrapper {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 80px;
+    width: 0;
+    .line {
+      width: 100vw;
+      margin: 8px 0 8px 0;
+      height: 1px;
+    }
+    div:nth-of-type(2) {
+      margin-left: 75px;
+    }
+    div:nth-of-type(3) {
+      margin-left: 150px;
+    }
+  }
+}
+
+/*---------------------------------------
+	TMPL: Home page
+---------------------------------------*/
+
+main, footer, body .sticky-footer {
+  width: calc(100% - 337px);
+  margin-left: 337px;
+
+}
+
+main {
+  position: relative;
+}
+
+.hero_section {
+  -webkit-background-size: cover;
+  background-size: cover;
+  background-position: center;
+  height: 1022px;
+  padding: 40px 80px;
+}
+
+.section {
+  padding: 90px 0 75px;
+  overflow-x: hidden;
+  &--dark {
+    background: $green;
+    position: relative;
+    * {
+      color: white;
+    }
+
+  }
+}
+
+.section_1 {
+  .custom_title {
+    margin-bottom: 60px;
+  }
+  .service_item {
+    padding: 0;
+    background: white;
+
+    svg {
+      transition-duration:0.5s ;
+      max-width: 150px;
+      max-height: 150px;
+      display: block;
+      margin: auto;
+    }
+    .cls-1 {
+      fill: $green;
+    }
+    p {
+      line-height: 2;
+    }
+    h5 {
+      margin-top: 10px;
+      text-align: center;
+    }
+    &__content{
+      max-height: 90%;;
+      width: 85%;
+    }
+  }
+  .custom_button {
+    margin-top: 60px;
+  }
+
+
+  .service_item {
+    .description {
+      display: none;
+    }
+    &:hover{
+      transition: all 2s ease;
+      svg {
+        transition-duration:0.5s ;
+      }
+      &>.service_item__content {
+        transition: all 2s ease;
+        h5{
+          text-decoration: underline;
+        }
+        &>.description {
+          display: block;
+          p {
+            text-align: center;
+          }
+        }
+      }
+    }
+
+
+  }
+
+
+
+}
+
+.section_2 {
+  background-image: url("../images/sofa1.png");
+  background-size: initial;
+  background-repeat: no-repeat;
+  background-position: right 40px bottom 30px;
+  font-size: 16px;
+  .custom_title {
+    margin-bottom: 50px;
+  }
+}
+
+.section_3 {
+  .custom_title {
+    margin-bottom: 100px;
+  }
+  .section_3__slider {
+    .slide {
+      padding: 0 10px;
+    }
+    img {
+      max-width: 100%;
+      max-height: 100%;
+    }
+  }
+  .custom_button {
+    margin-top: 50px;
+  }
+}
+
+/*---------------------------------------
+	TMPL:Price & Services
+---------------------------------------*/
+
+.catalog_section {
+  padding: 25px 0;
+  &__img {
+    @extend %bgcover;
+    min-height: 205px;
+  }
+  &__content {
+    padding-left: 70px;
+  }
+
+}
+
+.catalog_section__row {
+  margin-bottom: 50px;
+
+}
+
+.bettwen {
+  padding: 30px;
+
+  img {
+    width: 100%;
+
+  }
+}
+
+.catalog_price {
+  p {
+    font-weight: bold;
+    font-size: 35px !important;
+    margin-top: 25px;
+  }
+}
+
+/* ------------------------------------
+   TMPL: Resalts
+------------------------------------- */
+
+#open-popup {
+  padding: 20px
+}
+
+.white-popup {
+  position: relative;
+  background: #FFF;
+  padding: 40px;
+  width: auto;
+  max-width: 200px;
+  margin: 20px auto;
+  text-align: center;
+}
+
+/* ------------------------------------
+   TMPL: Testimonials
+
+------------------------------------- */
+.template--testimonials {
+  background: white;
+
+  .custom_button--green {
+    margin: auto;
+
+  }
+}
+
+.strong-view.default .testimonial-inner {
+
+  padding: 0 !important;
+
+}
+
+.strong-view.default .testimonial {
+  border: none !important;
+  img {
+    border: none !important;
+  }
+}
+
+.strong-content {
+  > div {
+    display: none !important;
+  }
+  > div:nth-of-type(1), & > div:nth-of-type(2), & > div:nth-of-type(3), & > div:nth-of-type(4) {
+    display: flex !important;
+  }
+  div.show {
+    display: flex !important;
+  }
+}
+
+
+
+.testimonials__form {
+  padding: 40px;
+}
+
+.testimonial-inner {
+  position: relative;
+  .testimonial-content {
+  }
+
+  .name_client {
+    font-size: 45px;
+    font-weight: bold;
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding-left: 265px;
+    text-align: left;
+    width: 100%;
+    line-height: 1;
+  }
+
+}
+/* ---------------------------------------------
+
+ Calendar
+
+----------------------------------------------*/
+
+
+
+.datepick-inline .date_available{
+  background: $green!important;
+}
+.controls{
+    input, .input-xlarge{
+    border: none!important;
+    background: inherit!important;
+    border-bottom: 1px solid!important;
+    border-radius: 0!important;
+
+    &:active,  &:focus {
+      outline:0!important;
+      border-bottom: 1px solid $green!important;
+      box-shadow: none!important;
+
+    }
+  }
+
+}
+
+//.wpbc_structure_form{
+//  margin-left: 50px!important;
+//  margin-top: 8px!important;
+//}
+
+.btn-default{
+  width: 100%!important;
+  background: inherit!important;
+  border: 1px solid $green!important;
+  border-radius: 0!important;
+}
+
+/* ------------------------------------
+    Footer Styles
+------------------------------------- */
+
+.template--results {
+  h4 {
+    margin-bottom: 35px;
+  }
+
+}
+
+.footer {
+  overflow-x: hidden;;
+  background: $green;
+  color: white;
+  padding: 80px 0 30px;
+
+  .container {
+    max-width: 1240px;
+    .row {
+      .col-md-6 {
+        h3 {
+          a {
+            color: $number !important;
+          }
+
+        }
+      }
+      .custom_form {
+        float: right;
+      }
+    }
+  }
+
+}
+
+.sticky-footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
+
+.footer_bar {
+  margin-top: 120px;
+  font-size: 25px;
+  * {
+    color: $yellow;
+    a {
+      text-decoration: underline;
+    }
+  }
+}
+
+.template {
+  &--results {
+    padding: 50px 0 85px;
+  }
+}
+
+.slick-list {
+  width: 100%;
+}
+
+.custom_arrow {
+  background-repeat: no-repeat;
+  width: 58px;
+  height: 106px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 99;
+  cursor: pointer;
+
+}
+
+.custom_arrow--right {
+  background-image: url(../images/right.svg);
+  right: -15px;
+
+}
+
+.custom_arrow--left {
+  background-image: url(../images/left.svg);
+  left: -15px;
+
+}
+
+.custom_arrow_white {
+  background-repeat: no-repeat;
+  width: 83px;
+  height: 76px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 99;
+  cursor: pointer;
+
+}
+
+.custom_white_arrow--right {
+  background-image: url(../images/right-arrow.svg);
+  right: 400px;
+}
+
+.custom_white_arrow--left {
+  background-image: url(../images/left-arrow.svg);
+  left: 400px;
+}
+
+.slide {
+  img {
+    display: block;
+    margin: auto;
+  }
+}
+
+.result {
+  text-align: center;
+  min-height: 400px;
+  @extend %bgcover;
+  background-position: inherit;
+}
+
+
+
+.layer {
+  position: fixed;
+  z-index:40;
+  background: #B9B9B9;
+  top: 0;
+  left: 0;
+  display: block;
+  width: 100vw;
+  height: 100vw;
+  margin-top: -50%;
+}
+
+.slider__results {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  z-index: 90;
+  max-width: 100%;
+
+
+  img {
+    display: block;
+    margin: auto;
+    z-index: 999999;
+
+  }
+}
+
+.result_wrapper > div:not([id='true_loadmore']) {
+  margin-bottom: 30px;
+}
+
+.current-menu-item {
+  padding-left: 25px;
+  position: relative;
+  a {
+    color: $yellow !important;
+
+    &:before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 20px;
+      width: 11px;
+      height: 11px;
+      transform: translateY(-50%);
+      background: $yellow;
+      border-radius: 50%;
+    }
+  }
+}
+
+
+
+input , textarea {
+  line-height: normal !important;
+  &::-ms-clear {
+    display: none !important;
+  }
+  &:placeholder-shown::placeholder {
+    line-height:normal !important;
+  }
+}
+
+
